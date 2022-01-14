@@ -1,0 +1,34 @@
+.login {
+  margin-top: 55px;
+  background-color: black;
+  min-height: 60vh;
+  width: 100%;
+  margin: 0;
+  padding: 100px;
+}
+.login h1,
+.login label {
+  color: white !important;
+}
+.login-form {
+  background-color: rgb(31, 31, 31);
+}
+.login-form input {
+  background-color: rgb(51, 51, 51);
+  border: none;
+}
+.btn1 {
+  font-size: 15px;
+  width: 50%;
+  align-self: center;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  opacity: 0.8;
+}
+.btn1:hover {
+  opacity: 1;
+}
+.login img {
+  width: 100%;
+}

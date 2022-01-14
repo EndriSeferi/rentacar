@@ -1,0 +1,104 @@
+.card {
+  padding: 1rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem;
+}
+.card img {
+  width: 30%;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 70%;
+  padding: 1rem;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.title h2 {
+  color: #1c1f23;
+}
+.tag-reservation {
+  background-color: green;
+  font-size: 1vw;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reserved {
+  background-color: brown;
+  font-size: 1vw;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1rem 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.characteristics {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  width: 50%;
+}
+.group p {
+  font-size: 0.6vw;
+  width: 80%;
+}
+.group i {
+  width: 30%;
+  text-align: center;
+  position: relative;
+  top: -6px;
+}
+.end {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0rem;
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price p {
+  margin: 0;
+  color: gray;
+}
+.price h3 {
+  margin: 0;
+  color: #1c1f23;
+}
+.link__car {
+  color: white;
+  text-decoration: none;
+  background-color: #1c1f23;
+  text-align: center;
+  border-radius: 5px;
+  width: 40%;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  margin-top: 10%;
+  font-size: 0.8vw;
+}

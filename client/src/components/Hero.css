@@ -1,0 +1,17 @@
+.home {
+  height: 70vh;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://www.fcmtravel.com/sites/default/files/styles/large/public/Landing-Page.jpg?itok=3di3rEPw");
+  background-position: center top;
+  background-size: cover;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero__title {
+  text-align: start;
+  color: white;
+  font-size: 50px;
+}

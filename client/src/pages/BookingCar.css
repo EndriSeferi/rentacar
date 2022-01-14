@@ -1,0 +1,103 @@
+.carCard {
+  padding: 1rem;
+  width: 90%;
+  border: 1px solid rgb(172, 172, 172);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem;
+}
+.carCard img {
+  width: 50%;
+  height: 500px;
+}
+.carInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+  padding: 1rem;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.title h2 {
+  color: #1a1a1a;
+}
+.title h5 {
+  color: #444444;
+}
+.characteristics {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-top: 1px solid rgb(124, 124, 124);
+  border-bottom: 1px solid rgb(124, 124, 124);
+  margin-bottom: 1rem;
+}
+.group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  width: 50%;
+}
+.group p {
+  font-size: 0.6vw;
+  width: 80%;
+}
+.group i {
+  width: 30%;
+  text-align: center;
+  position: relative;
+  top: -6px;
+}
+.end {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0rem;
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.price p {
+  margin: 0;
+  color: gray;
+}
+.price h3 {
+  margin: 0;
+  color: #1c1f23;
+}
+.link__car {
+  color: white;
+  text-decoration: none;
+  background-color: #1c1f23;
+  text-align: center;
+  border-radius: 5px;
+  width: 40%;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  margin-top: 10%;
+  font-size: 0.8vw;
+}
+.reserve-btn {
+  color: white;
+  background-color: #1c1f23;
+  padding: 0.5rem;
+  width: 50%;
+  align-self: center;
+  border-radius: 10px;
+  border: none;
+  transition: all ease-in-out 200ms;
+}
+.reserve-btn:hover {
+  background-color: #3f4144;
+}
