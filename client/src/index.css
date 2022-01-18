@@ -27,7 +27,7 @@
 }
 .wrapper {
   width: 50%;
-  margin: auto;
+  margin: 1rem auto;
   background-color: cadetblue;
   padding: 1rem;
   display: flex;

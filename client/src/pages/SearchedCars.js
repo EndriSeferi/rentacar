@@ -12,6 +12,7 @@ function SearchedCars() {
         {totalCars.map((car, index) => {
           return (
             <CarCard
+            
               key={index}
               car_id={car._id}
               image={car.image}

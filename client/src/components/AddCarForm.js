@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row, Form, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addCar } from "../redux/actions/carsAction";
 
 function AddCarForm() {
@@ -13,7 +13,7 @@ function AddCarForm() {
   }
   return (
     <>
-      <Row justify="center mt-5">
+      <Row justify="center ">
         <Col lg={12} sm={24}>
           <Form className="bs1 p-2" layout="vertical" onFinish={onFinish}>
             <h1>Add A New Car</h1>

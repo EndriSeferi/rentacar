@@ -2,7 +2,7 @@ const initialData = {
   bookings: [],
 };
 
-export const bookingsReducer = (state = initialData, action) => {
+export const bookingReducer = (state = initialData, action) => {
   switch (action.type) {
     case "GET_ALL_BOOKINGS": {
       return {

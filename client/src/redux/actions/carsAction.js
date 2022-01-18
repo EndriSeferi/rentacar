@@ -42,3 +42,56 @@ export const addCar = (reqObj) => async (dispatch) => {
     });
   }
 };
+
+export const editCar = (reqObj) => async (dispatch) => {
+  dispatch({ type: "LOADING", payload: true });
+  try {
+    await axios.post("/api/cars/editcar", reqObj);
+
+    dispatch({ type: "LOADING", payload: false });
+    message.success({
+      content: "Car Details Updated Successfully",
+      style: {
+        marginTop: "20vh",
+      },
+    });
+    setTimeout(() => {
+      window.location.href = "/admin";
+    }, 500);
+  } catch (error) {
+    message.error({
+      content: "Something Went Wrong Updating the Car!",
+      style: {
+        marginTop: "20vh",
+      },
+    });
+    dispatch({ type: "LOADING", payload: false });
+  }
+};
+
+export const deleteCar = (reqObj) => async (dispatch) => {
+  dispatch({ type: "LOADING", payload: true });
+
+  try {
+    await axios.post("/api/cars/deletecar", reqObj);
+
+    dispatch({ type: "LOADING", payload: false });
+    message.success({
+      content: "Car Deleted Successfully",
+      style: {
+        marginTop: "20vh",
+      },
+    });
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  } catch (error) {
+    message.error({
+      content: "Something Went Wrong Deleting Car!",
+      style: {
+        marginTop: "20vh",
+      },
+    });
+    dispatch({ type: "LOADING", payload: false });
+  }
+};

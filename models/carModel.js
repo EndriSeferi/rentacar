@@ -10,6 +10,7 @@ const carSchema = new mongoose.Schema(
     air: { type: String, required: true },
     bookedTimeSlots: [
       {
+        _id: { type: mongoose.Schema.Types.ObjectID, ref: "bookings" },
         from: { type: String, required: true },
         to: { type: String, required: true },
       },
