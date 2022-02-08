@@ -19,11 +19,7 @@ form {
   flex-direction: column;
   justify-content: space-evenly;
 }
-input {
-  margin: 0.5rem;
-  padding: 0.2rem;
-  font-size: 1vw;
-}
+
 .my-btn {
   width: 50%;
   align-self: center;
@@ -55,15 +51,27 @@ input {
   .form-container {
     transform: translate(0, 0);
     padding: 1rem;
-    width: 50%;
+    width: 80%;
   }
   .form-container h2 {
-    font-size: 4vw;
+    font-size: 8vw;
   }
-
+  .input-icons {
+    width: 100%;
+    height: 10vh;
+  }
   .my-btn {
     font-size: 2vw;
     align-self: flex-start;
+  }
+  .ant-picker-range-wrapper {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+  .ant-picker-panels {
+    flex-direction: column;
   }
 }
 .available__link {

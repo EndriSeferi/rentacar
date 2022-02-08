@@ -101,3 +101,19 @@
 .reserve-btn:hover {
   background-color: #3f4144;
 }
+
+@media only screen and (max-width: 600px) {
+  .carCard {
+    flex-direction: column;
+  }
+  .carCard img {
+    width: 90%;
+    height: 200px;
+  }
+  .characteristics {
+    width: 100%;
+  }
+  .carInfo {
+    width: 90%;
+  }
+}

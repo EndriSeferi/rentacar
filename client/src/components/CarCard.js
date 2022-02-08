@@ -2,6 +2,7 @@ import "./CarCard.css";
 import { Link } from "react-router-dom";
 
 function CarCard(props) {
+  const lang = localStorage.getItem("lang");
   return (
     <div className="card">
       <img src={props.image} alt="Car " />
@@ -29,7 +30,7 @@ function CarCard(props) {
         </div>
         <div className="end">
           <Link to={`/booking/${props.car_id}`} className="link__car">
-            Check Car!
+            {lang === "sq" ? "Shiko Makinen" : "Check Car"}
           </Link>
           <div className="price">
             <p>Price</p>

@@ -11,7 +11,7 @@ function MyForm() {
   const { cars } = useSelector((state) => state.carsReducer);
   const [totalCars, setTotalCars] = useState([]);
   const { RangePicker } = DatePicker;
-
+  const lang = localStorage.getItem("lang");
   useEffect(() => {
     setTotalCars(cars);
   }, [cars]);
@@ -71,11 +71,11 @@ function MyForm() {
       <form>
         <div className="form__inputs">
           <div className="input-icons">
-            <RangePicker onChange={handleDates} />
+            <RangePicker onChange={handleDates} size={12} />
           </div>
         </div>
         <button className="available__link" onClick={searchCar}>
-          Check For Cars!
+          {lang === "sq" ? "Shiko Per Makina" : "Check For Cars"}
         </button>
       </form>
     </div>

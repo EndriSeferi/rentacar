@@ -3,6 +3,8 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function Header() {
+  const lang = localStorage.getItem("lang");
+
   return (
     <Navbar
       collapseOnSelect
@@ -22,13 +24,13 @@ function Header() {
         >
           <Nav>
             <Nav.Link as={Link} to="/">
-              Home
+              {lang === "sq" ? "Kryefaqja" : "Home"}
             </Nav.Link>
             <Nav.Link as={Link} to="/about">
-              About Us
+              {lang === "sq" ? "Rreth Nesh" : "About Us"}
             </Nav.Link>
             <Nav.Link as={Link} to="/ourpolicy">
-              Our Policy
+              {lang === "sq" ? "Kontrata" : "Our Policy"}
             </Nav.Link>
             <Nav.Link as={Link} to="/login">
               Admin

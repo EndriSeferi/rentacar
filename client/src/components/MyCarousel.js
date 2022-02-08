@@ -25,10 +25,12 @@ function MyCarousel() {
     },
   };
   const { cars } = useSelector((state) => state.carsReducer);
-
+  const lang = localStorage.getItem("lang");
   return (
     <div className="big-carousel">
-      <h2 className="best__cars">OUR CARS</h2>
+      <h2 className="best__cars">
+        {lang === "sq" ? "MAKINAT TONA" : "OUR CARS"}
+      </h2>
       <Carousel responsive={responsive} showDots={true} className="carousel">
         {cars.map((car, index) => {
           return (

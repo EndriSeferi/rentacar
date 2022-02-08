@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 import { getAllCars } from "../redux/actions/carsAction";
 import { bookCar } from "../redux/actions/bookingActions";
 
 import { Button, DatePicker } from "antd";
-import { Modal, Form, Input } from "antd";
+import { Modal, Form, Input, Checkbox } from "antd";
 
 import "./BookingCar.css";
+import { set } from "mongoose";
+import emailjs, { init } from "@emailjs/browser";
 
 function BookingCar() {
   let { carid } = useParams();
@@ -20,11 +23,13 @@ function BookingCar() {
   const { RangePicker } = DatePicker;
   const [from, setFrom] = useState();
   const [to, setTo] = useState();
-
   const [totalDays, setTotalDays] = useState(0);
   const [totalAmount, setTotalAmount] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const lang = localStorage.getItem("lang");
+  var today = moment(new Date()).format("DD/MM/YYYY");
 
+  init("user_s63dTihoL0tdDW1JMr8ky");
   useEffect(() => {
     if (cars.length === 0) {
       dispatch(getAllCars());
@@ -45,9 +50,10 @@ function BookingCar() {
   const showModal = () => {
     setIsModalVisible(true);
   };
- useEffect(() => {
+  useEffect(() => {
     setTotalAmount(totalDays * car.rentPerHour);
-  }, [ totalDays]);
+  }, [totalDays]);
+
   const handleOk = (values) => {
     const reqObj = {
       car: car._id,
@@ -62,32 +68,89 @@ function BookingCar() {
       },
     };
     dispatch(bookCar(reqObj));
+    emailjs
+      .send("service_yb8ckko", "template_an5sikd", {
+        car: car.name,
+        userName: reqObj.userName,
+        userPhone: reqObj.userPhone,
+        userEmail: reqObj.userEmail,
+        from: reqObj.bookedTimeSlots.from,
+        to: reqObj.bookedTimeSlots.to,
+        totalDays,
+        totalAmount,
+      })
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
     setIsModalVisible(false);
   };
 
+  var getDaysArray = function (start, end) {
+    for (
+      var arr = [], dt = new Date(start);
+      dt <= end;
+      dt.setDate(dt.getDate() + 1)
+    ) {
+      arr.push(new Date(dt));
+    }
+    return arr;
+  };
+  var daylist = [];
+
+  useEffect(() => {
+    try {
+      car.bookedTimeSlots.forEach((element) => {
+        daylist.push(
+          ...getDaysArray(
+            new Date(moment(element.from, "MMMM Do YYYY").format("YYYY-MM-DD")),
+            new Date(moment(element.to, "MMMM Do YYYY").format("YYYY-MM-DD"))
+          )
+        );
+      });
+      daylist.map((v) => v.toISOString().slice(0, 10)).join("");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [car]);
+  function disabledDate(current) {
+    for (let i = 0; i < daylist.length; i++) {
+      if (
+        current.date() === moment(daylist[i]).date() &&
+        current.month() === moment(daylist[i]).month()
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
   const handleCancel = () => {
     setIsModalVisible(false);
+    window.location.reload();
   };
   return (
     <div className="sector booking">
-      <h1>Booking Car</h1>
+      <h1> {lang === "sq" ? "Rezervo Makinen" : "Booking Car"}</h1>
       {!loading ? (
         <div className="carCard">
           <img src={car.image} alt="Cars Image" />
           <div className="carInfo">
             <div className="title">
               <h2>{car.name}</h2>
-              <h5>Car Model</h5>
             </div>
             <div className="characteristics">
               <div className="group">
                 <i className="fa fa-user" />
-                <p>Capacity: </p>
+                <p>{lang === "sq" ? "Kapaciteti" : "Capacity"}</p>
                 <p>{car.capacity}</p>
               </div>
               <div className="group">
                 <i className="fas fa-gas-pump" />
-                <p>Fuel Type: </p>
+                <p>{lang === "sq" ? "Karburant" : "Fuel type:"} </p>
                 <p>{car.fuelType}</p>
               </div>
               <div className="group">
@@ -102,13 +165,22 @@ function BookingCar() {
               </div>
               <div className="group">
                 <i className="fas fa-coins" />
-                <p>Price: </p>
+                <p>{lang === "sq" ? "Cmimi" : "Price"}</p>
                 <p>{car.rentPerHour} $/day</p>
               </div>
             </div>
-            <RangePicker format="MMMM Do YYYY" onChange={selectTimeSlots} />
-            <h5>Total Days: {totalDays}</h5>
-            <h4>Total Price: {totalDays * car.rentPerHour} $</h4>
+            <RangePicker
+              format="MMMM Do YYYY"
+              onChange={selectTimeSlots}
+              disabledDate={(current) => disabledDate(current)}
+            />
+            <h5>
+              {lang === "sq" ? "Ditet Totale :" : "Total Days :"} {totalDays}
+            </h5>
+            <h4>
+              {lang === "sq" ? "Cmimi Total: " : "Total Price:"}{" "}
+              {totalDays * car.rentPerHour} $
+            </h4>
             <Modal
               title="Reserve Information"
               visible={isModalVisible}
@@ -117,10 +189,12 @@ function BookingCar() {
               footer={[]}
             >
               <Form layout="vertical" className="" onFinish={handleOk}>
-                <h1>Reservation Form</h1>
+                <h1>
+                  {lang === "sq" ? "Formulari Rezervimit" : "Reservation Form"}
+                </h1>
                 <Form.Item
                   name="name"
-                  label="Name and Surname"
+                  label={lang === "sq" ? "Emer Mbiemer" : "Name Surname"}
                   rules={[{ required: true }]}
                 >
                   <Input />
@@ -138,6 +212,31 @@ function BookingCar() {
                   rules={[{ required: true }]}
                 >
                   <Input />
+                </Form.Item>
+                <Form.Item
+                  name="agreement"
+                  valuePropName="checked"
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        value
+                          ? Promise.resolve()
+                          : Promise.reject(
+                              new Error("Should accept agreement")
+                            ),
+                    },
+                  ]}
+                >
+                  <Checkbox>
+                    {lang === "sq"
+                      ? "I kam lexuar dhe I pranoj"
+                      : "I have read and I accept the"}
+                    <Link to="ourpolicy">
+                      {lang === "sq"
+                        ? " Kushtet e Kontrates"
+                        : " Agreement of Our Policy Page"}
+                    </Link>
+                  </Checkbox>
                 </Form.Item>
                 <button className="reserve-btn">Reserve</button>
               </Form>

@@ -9,10 +9,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
 import SearchedCars from "./pages/SearchedCars";
+import Language from "./components/Language";
 
 function App() {
   return (
     <div className="App">
+      {localStorage.getItem("lang") === null ? <Language /> : ""}
       <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />

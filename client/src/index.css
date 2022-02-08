@@ -46,3 +46,72 @@
 .btn2:hover {
   background-color: rgb(48, 48, 48);
 }
+
+/* About Page */
+.about {
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.about h1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#info {
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#info h4 {
+  width: 60%;
+  color: rgb(29, 29, 29);
+  font-weight: 100;
+}
+.contact {
+  width: 45%;
+  margin-top: 5rem;
+}
+@media only screen and (max-width: 600px) {
+  #info h4 {
+    font-size: 4vw;
+    width: 80%;
+  }
+  .contact-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    border: 2px solid red;
+  }
+}
+.lang {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(236, 236, 236);
+  padding: 1rem 2rem;
+  top: 100px;
+  right: 0;
+  z-index: 99;
+}
+.wrap-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.wrap-btn button {
+  border: none;
+  outline: none;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
