@@ -29,7 +29,7 @@ function BookingCar() {
   const lang = localStorage.getItem("lang");
   var today = moment(new Date()).format("DD/MM/YYYY");
 
-  init("user_s63dTihoL0tdDW1JMr8ky");
+  init("user_P2T9QOMCokERgI4RSoMRJ");
   useEffect(() => {
     if (cars.length === 0) {
       dispatch(getAllCars());
