@@ -15,7 +15,7 @@ function Login() {
       <Row gutter={16} className="d-flex align-items-center">
         <Col lg={16} style={{ position: "relative" }}>
           <img
-            src="https://www.loudwallpapers.com/wp-content/gallery/black-car/lovely-black-car-wallpaper-with-black-background.jpg"
+            src="https://wallpaperaccess.com/full/2492629.jpg"
             alt="black car"
           />
         </Col>
