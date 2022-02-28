@@ -9,15 +9,5 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EndriSeferi/rentacar.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EndriSeferi/rentacar/issues"
-  },
-  "homepage": "https://github.com/EndriSeferi/rentacar#readme"
+  }
 }
