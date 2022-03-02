@@ -29,7 +29,7 @@ function BookingCar() {
   const lang = localStorage.getItem("lang");
   var today = moment(new Date()).format("DD/MM/YYYY");
 
-  init("user_s63dTihoL0tdDW1JMr8ky");
+  init("user_P2T9QOMCokERgI4RSoMRJ");
   useEffect(() => {
     if (cars.length === 0) {
       dispatch(getAllCars());
@@ -69,7 +69,7 @@ function BookingCar() {
     };
     dispatch(bookCar(reqObj));
     emailjs
-      .send("service_yb8ckko", "template_an5sikd", {
+      .send("service_mn0bez5", "template_1nevlr4", {
         car: car.name,
         userName: reqObj.userName,
         userPhone: reqObj.userPhone,
