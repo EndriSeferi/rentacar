@@ -67,7 +67,7 @@ function MyForm() {
   }
   return (
     <div className="form-container">
-      <h2>Tirana Rent A Car</h2>
+      <h2>Tirana Rent Cars</h2>
       <form>
         <div className="form__inputs">
           <div className="input-icons">

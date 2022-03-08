@@ -15,7 +15,7 @@ function Header() {
     >
       <Container fluid className="my__container">
         <Navbar.Brand as={Link} to="/" className="my__title">
-          Tirana Rent A Car
+          Tirana Rent Cars
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
@@ -28,9 +28,6 @@ function Header() {
             </Nav.Link>
             <Nav.Link as={Link} to="/about">
               {lang === "sq" ? "Rreth Nesh" : "About Us"}
-            </Nav.Link>
-            <Nav.Link as={Link} to="/ourpolicy">
-              {lang === "sq" ? "Kontrata" : "Our Policy"}
             </Nav.Link>
             <Nav.Link as={Link} to="/login">
               Admin
