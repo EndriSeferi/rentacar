@@ -39,12 +39,23 @@ function BookingCar() {
   }, [cars]);
 
   function selectTimeSlots(values) {
-    setFrom(moment(values[0]).format("MMMM Do YYYY"));
-    setTo(moment(values[1]).format("MMMM Do YYYY"));
-    setTotalDays(values[1].diff(values[0], "days"));
-    setTotalAmount(totalDays * car.rentPerHour);
+    const from = values[0];
+    const to = values[1];
+    if (to.diff(from, "days") <= 3) {
+      alert(
+        lang === "sq"
+          ? "Minimumi per rezervim eshte 3 dit"
+          : "Minimum for reservation is 3 days"
+      );
+      window.location.reload();
+    } else {
+      setFrom(moment(values[0]).format("MMMM Do YYYY"));
+      setTo(moment(values[1]).format("MMMM Do YYYY"));
+      setTotalDays(values[1].diff(values[0], "days"));
+      setTotalAmount(totalDays * car.rentPerHour);
 
-    showModal();
+      showModal();
+    }
   }
 
   const showModal = () => {
@@ -166,7 +177,7 @@ function BookingCar() {
               <div className="group">
                 <i className="fas fa-coins" />
                 <p>{lang === "sq" ? "Cmimi" : "Price"}</p>
-                <p>{car.rentPerHour} $/day</p>
+                <p>{car.rentPerHour} €/day</p>
               </div>
             </div>
             <RangePicker
@@ -179,7 +190,7 @@ function BookingCar() {
             </h5>
             <h4>
               {lang === "sq" ? "Cmimi Total: " : "Total Price:"}{" "}
-              {totalDays * car.rentPerHour} $
+              {totalDays * car.rentPerHour} €
             </h4>
             <Modal
               title="Reserve Information"

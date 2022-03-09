@@ -34,7 +34,7 @@ function CarCard(props) {
           </Link>
           <div className="price">
             <p>Price</p>
-            <h4>{props.price}$/day</h4>
+            <h4>{props.price}€/day</h4>
           </div>
         </div>
       </div>
