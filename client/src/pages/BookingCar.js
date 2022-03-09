@@ -24,10 +24,10 @@ function BookingCar() {
   const [from, setFrom] = useState();
   const [to, setTo] = useState();
   const [totalDays, setTotalDays] = useState(0);
-  const [totalAmount, setTotalAmount] = useState();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [totalAmount, setTotalAmount] = useState();
   const lang = localStorage.getItem("lang");
-  var today = moment(new Date()).format("DD/MM/YYYY");
+  const [price, setPrice] = useState(1);
 
   init("user_P2T9QOMCokERgI4RSoMRJ");
   useEffect(() => {
@@ -41,19 +41,28 @@ function BookingCar() {
   function selectTimeSlots(values) {
     const from = values[0];
     const to = values[1];
-    if (to.diff(from, "days") <= 3) {
+
+    if (to.diff(from, "days") <= 1) {
       alert(
         lang === "sq"
           ? "Minimumi per rezervim eshte 3 dit"
           : "Minimum for reservation is 3 days"
       );
       window.location.reload();
+    }
+    if (
+      from > moment(`6/24/${from.year()}`, "M/D/YYYY") &&
+      from < moment(`9/6/${from.year()}`, "M/D/YYYY")
+    ) {
+      setFrom(moment(values[0]).format("MMMM Do YYYY"));
+      setTo(moment(values[1]).format("MMMM Do YYYY"));
+      setTotalDays(values[1].diff(values[0], "days"));
+      setPrice(1.6);
+      showModal();
     } else {
       setFrom(moment(values[0]).format("MMMM Do YYYY"));
       setTo(moment(values[1]).format("MMMM Do YYYY"));
       setTotalDays(values[1].diff(values[0], "days"));
-      setTotalAmount(totalDays * car.rentPerHour);
-
       showModal();
     }
   }
@@ -62,8 +71,8 @@ function BookingCar() {
     setIsModalVisible(true);
   };
   useEffect(() => {
-    setTotalAmount(totalDays * car.rentPerHour);
-  }, [totalDays]);
+    setTotalAmount(totalDays * car.rentPerHour * price);
+  }, [totalDays, totalAmount]);
 
   const handleOk = (values) => {
     const reqObj = {
@@ -189,8 +198,7 @@ function BookingCar() {
               {lang === "sq" ? "Ditet Totale :" : "Total Days :"} {totalDays}
             </h5>
             <h4>
-              {lang === "sq" ? "Cmimi Total: " : "Total Price:"}{" "}
-              {totalDays * car.rentPerHour} €
+              {lang === "sq" ? "Cmimi Total: " : "Total Price:"} {totalAmount} €
             </h4>
             <Modal
               title="Reserve Information"
@@ -237,17 +245,10 @@ function BookingCar() {
                             ),
                     },
                   ]}
-                >
-                  <Checkbox>
-                    {lang === "sq"
-                      ? "I kam lexuar dhe I pranoj"
-                      : "I have read and I accept the"}
-                    <Link to="ourpolicy">
-                      {lang === "sq"
-                        ? " Kushtet e Kontrates"
-                        : " Agreement of Our Policy Page"}
-                    </Link>
-                  </Checkbox>
+                ></Form.Item>
+                <Form.Item name="price">
+                  <h4>Total Days : {totalDays}</h4>
+                  <h4>Total Amount : {totalAmount} €</h4>
                 </Form.Item>
                 <button className="reserve-btn">Reserve</button>
               </Form>
