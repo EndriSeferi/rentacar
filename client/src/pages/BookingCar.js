@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
-import { Link } from "react-router-dom";
 
 import { getAllCars } from "../redux/actions/carsAction";
 import { bookCar } from "../redux/actions/bookingActions";
 
-import { Button, DatePicker } from "antd";
+import { DatePicker } from "antd";
 import { Modal, Form, Input, Checkbox } from "antd";
 
 import "./BookingCar.css";
-import { set } from "mongoose";
 import emailjs, { init } from "@emailjs/browser";
 
 function BookingCar() {
@@ -28,6 +26,7 @@ function BookingCar() {
   const [totalAmount, setTotalAmount] = useState();
   const lang = localStorage.getItem("lang");
   const [price, setPrice] = useState(1);
+  const [busyDay, setBusyDay] = useState([]);
 
   init("user_P2T9QOMCokERgI4RSoMRJ");
   useEffect(() => {
@@ -48,6 +47,7 @@ function BookingCar() {
           ? "Minimumi per rezervim eshte 3 dit"
           : "Minimum for reservation is 3 days"
       );
+      setIsModalVisible(false);
       window.location.reload();
     }
     if (
@@ -70,6 +70,7 @@ function BookingCar() {
   const showModal = () => {
     setIsModalVisible(true);
   };
+
   useEffect(() => {
     setTotalAmount(totalDays * car.rentPerHour * price);
   }, [totalDays, totalAmount]);
@@ -77,7 +78,7 @@ function BookingCar() {
   const handleOk = (values) => {
     const reqObj = {
       car: car._id,
-      userName: values.name,
+      userName: values.userName,
       userPhone: values.phone,
       userEmail: values.email,
       totalDays,
@@ -120,7 +121,8 @@ function BookingCar() {
     }
     return arr;
   };
-  var daylist = [];
+
+  let daylist = [];
 
   useEffect(() => {
     try {
@@ -132,25 +134,26 @@ function BookingCar() {
           )
         );
       });
-      daylist.map((v) => v.toISOString().slice(0, 10)).join("");
+      setBusyDay(daylist);
     } catch (error) {
       console.log(error);
     }
   }, [car]);
+
   function disabledDate(current) {
-    for (let i = 0; i < daylist.length; i++) {
+    for (let i = 0; i < busyDay.length; i++) {
       if (
-        current.date() === moment(daylist[i]).date() &&
-        current.month() === moment(daylist[i]).month()
+        current.date() === moment(busyDay[i]).date() &&
+        current.month() === moment(busyDay[i]).month()
       ) {
         return true;
       }
     }
     return false;
   }
+
   const handleCancel = () => {
     setIsModalVisible(false);
-    window.location.reload();
   };
   return (
     <div className="sector booking">
@@ -212,7 +215,7 @@ function BookingCar() {
                   {lang === "sq" ? "Formulari Rezervimit" : "Reservation Form"}
                 </h1>
                 <Form.Item
-                  name="name"
+                  name="userName"
                   label={lang === "sq" ? "Emer Mbiemer" : "Name Surname"}
                   rules={[{ required: true }]}
                 >
@@ -232,21 +235,7 @@ function BookingCar() {
                 >
                   <Input />
                 </Form.Item>
-                <Form.Item
-                  name="agreement"
-                  valuePropName="checked"
-                  rules={[
-                    {
-                      validator: (_, value) =>
-                        value
-                          ? Promise.resolve()
-                          : Promise.reject(
-                              new Error("Should accept agreement")
-                            ),
-                    },
-                  ]}
-                ></Form.Item>
-                <Form.Item name="price">
+                <Form.Item>
                   <h4>Total Days : {totalDays}</h4>
                   <h4>Total Amount : {totalAmount} €</h4>
                 </Form.Item>
