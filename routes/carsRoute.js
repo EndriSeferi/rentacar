@@ -26,9 +26,12 @@ router.post("/editcar", async (req, res) => {
     const car = await Car.findOne({ _id: req.body._id });
     car.name = req.body.name;
     car.image = req.body.image;
+    car.secImage = req.body.secImage;
     car.fuelType = req.body.fuelType;
     car.rentPerHour = req.body.rentPerHour;
     car.capacity = req.body.capacity;
+    car.air = req.body.air;
+    car.gear = req.body.gear;
 
     await car.save();
 

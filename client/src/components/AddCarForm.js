@@ -32,6 +32,13 @@ function AddCarForm() {
               <Input />
             </Form.Item>
             <Form.Item
+              name="secImage"
+              label="Second Image URL"
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
               name="rentPerHour"
               label="Price"
               rules={[{ required: true }]}

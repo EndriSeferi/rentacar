@@ -4,6 +4,7 @@ const carSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     image: { type: String, required: true },
+    secImage: { type: String, required: true },
     capacity: { type: Number, required: true },
     fuelType: { type: String, required: true },
     gear: { type: String, required: true },

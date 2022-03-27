@@ -7,6 +7,15 @@ import { useDispatch } from "react-redux";
 function EditCars(props) {
   const temp = [];
   const [id, setId] = useState();
+  const [editName, setEditName] = useState();
+  const [editCapacity, setEditCapacity] = useState();
+  const [editFuelType, setEditFuelType] = useState();
+  const [editPrice, setEditPrice] = useState();
+  const [editGear, setEditGear] = useState();
+  const [editAir, setEditAir] = useState();
+  const [editImage, setEditImage] = useState();
+  const [editSecImage, setEditSecImage] = useState();
+
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const columns = [
@@ -47,7 +56,7 @@ function EditCars(props) {
         <>
           <EditOutlined
             style={{ cursor: "pointer", marginRight: "1rem" }}
-            onClick={() => handleEdit(temp.key)}
+            onClick={() => handleEdit(temp)}
           />
           <Popconfirm
             title="Are you sure to delete this car?"
@@ -63,15 +72,47 @@ function EditCars(props) {
       ),
     },
   ];
-  
-  function handleEdit(carid) {
+
+  function handleEdit(editedCar) {
+    setId(editedCar.key);
+    setEditName(editedCar.name);
+    setEditCapacity(editedCar.capacity);
+    setEditFuelType(editedCar.fuelType);
+    setEditGear(editedCar.gear);
+    setEditPrice(editedCar.price);
+    setEditAir(editedCar.air);
+    setEditImage(editedCar.image);
+    setEditSecImage(editedCar.secImage);
     setIsModalVisible(true);
-    setId(carid);
   }
   const handleOk = (values) => {
+    // Check for empty inputs
     values._id = id;
+    if (values.name === "") {
+      values.name = editName;
+    }
+    if (values.image === "") {
+      values.image = editImage;
+    }
+    if (values.secImage === "") {
+      values.secImage = editSecImage;
+    }
+    if (values.capacity === "") {
+      values.capacity = editCapacity;
+    }
+    if (values.fuelType === "") {
+      values.fuelType = editFuelType;
+    }
+    if (values.rentPerHour === "") {
+      values.rentPerHour = editPrice;
+    }
+    if (values.air === "") {
+      values.air = editAir;
+    }
+    if (values.gear === "") {
+      values.gear = editGear;
+    }
     dispatch(editCar(values));
-    console.log(values);
   };
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -85,6 +126,8 @@ function EditCars(props) {
       fuelType: car.fuelType,
       gear: car.gear,
       air: car.air,
+      image: car.image,
+      secImage: car.secImage,
     });
   });
 
@@ -101,45 +144,32 @@ function EditCars(props) {
             footer={[]}
           >
             <Form layout="vertical" className="" onFinish={handleOk}>
-              <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+              <Form.Item name="name" label="Name" initialValue="">
                 <Input />
               </Form.Item>
-              <Form.Item
-                name="image"
-                label="Image"
-                rules={[{ required: true }]}
-              >
+              <Form.Item name="image" label="Image" initialValue="">
                 <Input />
               </Form.Item>
-              <Form.Item
-                name="capacity"
-                label="Capacity"
-                rules={[{ required: true }]}
-              >
+              <Form.Item name="secImage" label="Second Image" initialValue="">
                 <Input />
               </Form.Item>
-              <Form.Item
-                name="fuelType"
-                label="Fuel Type"
-                rules={[{ required: true }]}
-              >
+              <Form.Item name="capacity" label="Capacity" initialValue="">
+                <Input />
+              </Form.Item>
+              <Form.Item name="fuelType" label="Fuel Type" initialValue="">
                 <Input />
               </Form.Item>
               <Form.Item
                 name="rentPerHour"
                 label="Rent Per Day"
-                rules={[{ required: true }]}
+                initialValue=""
               >
                 <Input />
               </Form.Item>
-              <Form.Item name="gear" label="Gear" rules={[{ required: true }]}>
+              <Form.Item name="gear" label="Gear" initialValue="">
                 <Input />
               </Form.Item>
-              <Form.Item
-                name="air"
-                label="Air-Condition"
-                rules={[{ required: true }]}
-              >
+              <Form.Item name="air" label="Air-Condition" initialValue="">
                 <Input />
               </Form.Item>
               <button className="reserve-btn">Update</button>

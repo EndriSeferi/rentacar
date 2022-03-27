@@ -117,3 +117,15 @@
     width: 90%;
   }
 }
+.carousel-cars {
+  width: 90%;
+}
+.carusel-container {
+  width: 50%;
+  max-height: 35rem;
+}
+
+.slick-dots li button {
+  margin-top: 2rem;
+  background: black !important;
+}

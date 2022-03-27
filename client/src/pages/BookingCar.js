@@ -7,7 +7,7 @@ import { getAllCars } from "../redux/actions/carsAction";
 import { bookCar } from "../redux/actions/bookingActions";
 
 import { DatePicker } from "antd";
-import { Modal, Form, Input, Checkbox } from "antd";
+import { Modal, Form, Input, Carousel } from "antd";
 
 import "./BookingCar.css";
 import emailjs, { init } from "@emailjs/browser";
@@ -155,12 +155,18 @@ function BookingCar() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
   return (
     <div className="sector booking">
       <h1> {lang === "sq" ? "Rezervo Makinen" : "Booking Car"}</h1>
       {!loading ? (
         <div className="carCard">
-          <img src={car.image} alt="Cars Image" />
+          <div className="carusel-container">
+            <Carousel className="carousel-cars" showDots={true}>
+              <img src={car.image} alt="Cars Image" />
+              <img src={car.secImage} alt="Cars Image" />
+            </Carousel>
+          </div>
           <div className="carInfo">
             <div className="title">
               <h2>{car.name}</h2>
