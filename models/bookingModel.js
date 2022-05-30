@@ -6,7 +6,7 @@ const bookingSchema = new mongoose.Schema({
   userPhone: { type: Number },
   userEmail: { type: String },
   bookedTimeSlots: {
-    _id: { type: mongoose.Schema.Types.ObjectID, ref: "bookings" },
+    _id: { type: mongoose.Schema.Types.ObjectId, ref: "bookings" },
     from: { type: String },
     to: { type: String },
   },
