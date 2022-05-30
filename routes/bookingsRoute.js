@@ -39,12 +39,12 @@ router.get("/getallbookings", async (req, res) => {
 
 router.post("/deletebooking", async (req, res) => {
   try {
+    await Booking.findOneAndDelete({ _id: req.body.bookid });
     await Car.findOneAndUpdate(
       { _id: req.body.carid },
       { $pull: { bookedTimeSlots: { _id: req.body.bookid } } },
       { safe: true, multi: false }
     );
-    await Booking.findOneAndDelete({ _id: req.body.bookid });
     return res.status(200).json({ message: "Album Deleted Successfully" });
   } catch (error) {
     return res.status(400).json(error);
