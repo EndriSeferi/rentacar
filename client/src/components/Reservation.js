@@ -50,7 +50,13 @@ function Reservation(props) {
         <Popconfirm
           title="Are you sure to delete this car?"
           onConfirm={() => {
-            dispatch(deleteBooking({ bookid: temp.key, carid: temp.car }));
+            dispatch(
+              deleteBooking({
+                bookid: temp.key,
+                carid: temp.car,
+                from: temp.from,
+              })
+            );
           }}
           okText="Yes"
           cancelText="No"
