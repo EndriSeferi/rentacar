@@ -44,7 +44,12 @@ export const deleteBooking = (reqObj) => async (dispatch) => {
   try {
     await axios.post("/api/bookings/deletebooking", reqObj);
     dispatch({ type: "LOADING", payload: false });
-    console.log("Booking Deleted Successfully");
+    message.success({
+      content: "Booking Deleted Successfully",
+      style: {
+        marginTop: "20vh",
+      },
+    });
     setTimeout(() => {
       window.location.reload();
     }, 2000);
