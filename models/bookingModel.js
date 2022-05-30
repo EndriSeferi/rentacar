@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-  car: { type: mongoose.Schema.Types.ObjectID, ref: "cars" },
-  userName: {type: String},
-  userPhone: {type:Number},
-  userEmail: {type: String},
+  car: { type: mongoose.Schema.Types.ObjectId, ref: "cars" },
+  userName: { type: String },
+  userPhone: { type: Number },
+  userEmail: { type: String },
   bookedTimeSlots: {
     from: { type: String },
     to: { type: String },
