@@ -47,7 +47,7 @@ export const deleteBooking = (reqObj) => async (dispatch) => {
     console.log("Booking Deleted Successfully");
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 2000);
   } catch (error) {
     console.log(error);
     dispatch({ type: "LOADING", payload: false });
