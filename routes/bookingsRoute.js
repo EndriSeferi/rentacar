@@ -18,7 +18,7 @@ router.post("/bookcar", async (req, res) => {
     var mongoose = require("mongoose");
 
     car.bookedTimeSlots.push({
-      _id: mongoose.Types.ObjectId.createFromHexString(test),
+      _id: new mongoose.Types.ObjectId(test),
       from: req.body.bookedTimeSlots.from,
       to: req.body.bookedTimeSlots.to,
     });
