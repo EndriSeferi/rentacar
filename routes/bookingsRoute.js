@@ -7,22 +7,21 @@ router.post("/bookcar", async (req, res) => {
   var test;
   try {
     const newbooking = new Booking(req.body);
-    await newbooking.save((err, room) => {
-      if (err) return `Error saving the new booking${err}`;
-      let { _id } = room;
-      test = _id;
-      console.log(`New Room id: ${test}`);
-      return room;
-    });
+
     const car = await Car.findOne({ _id: req.body.car });
     var mongoose = require("mongoose");
 
     car.bookedTimeSlots.push({
-      _id: new mongoose.Types.ObjectId(test),
+      _id: new mongoose.Types.ObjectId(newbooking._id),
       from: req.body.bookedTimeSlots.from,
       to: req.body.bookedTimeSlots.to,
     });
     await car.save();
+    await newbooking.save((err, room) => {
+      if (err) return `Error saving the new booking${err}`;
+      return room;
+    });
+
     res.send("Your booking is successfull");
   } catch (error) {
     console.log("Tgus errir", error);
