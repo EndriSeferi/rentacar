@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const router = express.Router();
 const Booking = require("../models/bookingModel");
 const Car = require("../models/carModel");
@@ -16,11 +15,9 @@ router.post("/bookcar", async (req, res) => {
       return room;
     });
     const car = await Car.findOne({ _id: req.body.car });
-    const bookedtimeslotid = new mongoose.Types.ObjectId.createFromHexString(
-      String(test)
-    );
+    var mongoose = require("mongoose");
     car.bookedTimeSlots.push({
-      _id: bookedtimeslotid,
+      _id: mongoose.Types.ObjectId(String(test)),
       from: req.body.bookedTimeSlots.from,
       to: req.body.bookedTimeSlots.to,
     });
