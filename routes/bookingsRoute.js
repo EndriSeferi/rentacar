@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 const Booking = require("../models/bookingModel");
 const Car = require("../models/carModel");
@@ -16,14 +17,14 @@ router.post("/bookcar", async (req, res) => {
     });
     const car = await Car.findOne({ _id: req.body.car });
     car.bookedTimeSlots.push({
-      _id: test,
+      _id: new mongoose.Types.ObjectId(String(test)),
       from: req.body.bookedTimeSlots.from,
       to: req.body.bookedTimeSlots.to,
     });
     await car.save();
     res.send("Your booking is successfull");
   } catch (error) {
-    console.log(error);
+    console.log("Tgus errir", error);
     return res.status(400).json(error);
   }
 });
@@ -39,12 +40,15 @@ router.get("/getallbookings", async (req, res) => {
 
 router.post("/deletebooking", async (req, res) => {
   try {
-    await Booking.findOneAndDelete({ _id: req.body.bookid });
+    // const car = await Car.findById({ _id: req.body.car });
+    // console.log(` Car id: ${car}`);
+    // car.bookedTimeSlots.filter((el) => el._id !== req.body.bookid);
     await Car.findOneAndUpdate(
-      { _id: req.body.carid },
+      { _id: req.body.car },
       { $pull: { bookedTimeSlots: { _id: req.body.bookid } } },
       { safe: true, multi: false }
     );
+    await Booking.findOneAndDelete({ _id: req.body.bookid });
     return res.status(200).json({ message: "Album Deleted Successfully" });
   } catch (error) {
     return res.status(400).json(error);

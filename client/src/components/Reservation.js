@@ -53,7 +53,7 @@ function Reservation(props) {
             dispatch(
               deleteBooking({
                 bookid: temp.key,
-                carid: temp.car,
+                car: temp.car,
                 from: temp.from,
               })
             );
