@@ -17,7 +17,7 @@ router.post("/bookcar", async (req, res) => {
     });
     const car = await Car.findOne({ _id: req.body.car });
     car.bookedTimeSlots.push({
-      _id: new mongoose.Types.ObjectId(String(test)),
+      _id: mongoose.Types.ObjectId(String(test)),
       from: req.body.bookedTimeSlots.from,
       to: req.body.bookedTimeSlots.to,
     });
