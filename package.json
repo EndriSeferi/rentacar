@@ -2,6 +2,9 @@
   "name": "rentacar",
   "version": "1.0.1",
   "description": "A reservation website for renting cars in Albania",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
